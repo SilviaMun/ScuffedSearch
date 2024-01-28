@@ -22,7 +22,7 @@ typedef struct {
 } ThreadData;
 
 // Critical section for thread-safe operations on the linked list
-CRITICAL_SECTION cs;
+CRITICAL_SECTION cs;  
 Result *head = NULL; // Head of the linked list for storing results
 volatile long occurrences = 0; // Counter for the number of occurrences found
 
@@ -121,7 +121,6 @@ void searchDirectory(const char *folderPath, const char *searchString) {
 
     FindClose(hFind);
 }
-
 // Function to remove duplicate lines from the linked list
 void removeDuplicates() {
     Result *current, *temp, *prev;
@@ -183,6 +182,8 @@ void freeList() {
 int main() {
     InitializeCriticalSection(&cs);
 
+    printf("\nWelcome to Scuffed Search!\n");
+
     // ASCII art for the program header
     const char *asciiArt =
         " ____ ____ ____ ____ ____ ____ ____ _________ ____ ____ ____ ____ ____ ____ \n"
@@ -190,10 +191,13 @@ int main() {
         "||__|||__|||__|||__|||__|||__|||__|||_______|||__|||__|||__|||__|||__|||__||\n"
         "|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|/_______\\|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|\n"
         "                                                                            \n";
+    
     printf("%s", asciiArt);
 
     char folderPath[MAX_PATH_LENGTH];
     char searchString[MAX_SEARCH_STR];
+
+    printf("Where precision is not our forte, but we still find your ''stuff''... probably.\n\n");
 
     printf("Enter the folder path: ");
     fgets(folderPath, MAX_PATH_LENGTH, stdin);
@@ -203,6 +207,8 @@ int main() {
     fgets(searchString, MAX_SEARCH_STR, stdin);
     searchString[strcspn(searchString, "\n")] = 0;
 
+    printf("\nStarting the Scuffed Search...\n\n");
+
     searchDirectory(folderPath, searchString);
 
     printf("Processing complete. Removing duplicates...\n");
@@ -210,6 +216,8 @@ int main() {
 
     printf("Splitting data and writing results to CSV...\n");
     splitAndWriteResultsToCSV("output.csv");
+
+    printf("\nScuffed search completed. Have a nice day!\n");
 
     freeList();
     DeleteCriticalSection(&cs);
