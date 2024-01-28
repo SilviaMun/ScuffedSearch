@@ -7,7 +7,7 @@
 #define MAX_PATH_LENGTH 260
 #define MAX_SEARCH_STR 100
 #define MAX_LINE_LENGTH 1024
-#define MAX_THREADS 10
+#define MAX_THREADS 10 // change threads here
 
 // Structure to store search results
 typedef struct Result {
